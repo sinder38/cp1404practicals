@@ -31,6 +31,8 @@ def main():
         print(MENU)
         choice = input("Enter choice: ").upper()
 
+    print("Thank you for playing!")  # Screw you
+
 
 def get_score():
     """Get a valid score"""
