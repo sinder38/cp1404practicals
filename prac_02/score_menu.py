@@ -1,4 +1,9 @@
-STAR_SYMBOL = "★"
+"""
+CP1404 - Practical
+Program to determine score status and print matching amount of stars
+"""
+
+STAR_SYMBOL = "★"  # Aste risk my ****                                                                                                        (word "mark" is censored here)
 MENU = """(G)et a valid score
 (P)rint result
 (S)how stars
@@ -6,6 +11,7 @@ MENU = """(G)et a valid score
 
 
 def main():
+    """Run the score program and continue until the user exits"""
     score = get_score()
     print(MENU)
     choice = input("Enter choice: ").upper()
@@ -27,6 +33,7 @@ def main():
 
 
 def get_score():
+    """Get a valid score"""
     score = float(input("Enter a valid score (0-100): "))
     while score < 0 or score > 100:
         print("Invalid score. Score must be between 0 and 100, inclusive.")
@@ -35,9 +42,10 @@ def get_score():
 
 
 def determine_status(score):
-    if score < 0 or score > 100:
-        return "Invalid score. Score must be between 0 and 100, inclusive."
-    elif score >= 90:
+    """Determine score status (0-100)"""
+    # No need to check score validity as
+    # it is checked by get_score() function
+    if score >= 90:
         return "Excellent"
     elif score >= 50:
         return "Passable"
@@ -46,7 +54,9 @@ def determine_status(score):
 
 
 def show_stars(score):
+    """Print as many  stars as the score"""
     print(STAR_SYMBOL * int(score))
 
 
-main()
+if __name__ == "__main__":
+    main()
