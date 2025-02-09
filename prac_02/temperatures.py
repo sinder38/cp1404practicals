@@ -36,3 +36,6 @@ def convert_celsius_to_fahrenheit(celsius):
 def convert_fahrenheit_to_celsius(fahrenheit):
     """Convert fahrenheit to celsius"""
     return 5 / 9 * (fahrenheit - 32)
+
+if __name__ == "__main__":
+    main()
