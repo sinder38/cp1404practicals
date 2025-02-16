@@ -36,7 +36,6 @@ for i, number in enumerate(numbers, 1):
 output = f"{year} {name} for about ${cost:,.0f}!"
 print(output)
 
-# TODO: Using a for loop with the range function and f-string formatting,
 # produce the following right-aligned output (DO NOT use a list):
 # 2 ^ 0 is    1
 # 2 ^ 1 is    2
@@ -49,3 +48,8 @@ print(output)
 # 2 ^ 8 is  256
 # 2 ^ 9 is  512
 # 2 ^10 is 1024
+BASE = 2
+EXPONENT_LIMIT = 10 # don't use numbers higher than 99
+
+for i in range(EXPONENT_LIMIT + 1):
+    print(f"{BASE} ^{i:2} is {BASE**i:4}")
