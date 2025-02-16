@@ -5,7 +5,6 @@ Password checker "skeleton" code to help you get started
 
 MIN_LENGTH = 2
 MAX_LENGTH = 6
-
 MIN_NUMBER_OF_LOWER = 1
 MIN_NUMBER_OF_UPPER = 1
 MIN_NUMBER_OF_DIGIT = 1
@@ -16,6 +15,18 @@ SPECIAL_CHARACTERS = "!@#$%^&*()_-=+`~,./'[]<>?{}|\\"
 def main():
     """Program to get and check a user's password."""
     print("Please enter a valid password")
+    print_requirements()
+
+    password = input("> ")
+    while not is_valid_password(password):
+        print("Invalid password!")
+        password = input("> ")
+
+    print(f"Your {len(password)}-character password is valid: {password}")
+
+
+def print_requirements():
+    """Print requirements for a valid password"""
     print(f"Your password must be between {MIN_LENGTH} and {MAX_LENGTH} characters, and contain:")
     if MIN_NUMBER_OF_UPPER > 0:
         print(f"\t{MIN_NUMBER_OF_UPPER} or more uppercase characters")
@@ -25,13 +36,6 @@ def main():
         print(f"\t{MIN_NUMBER_OF_DIGIT} or more numbers")
     if MIN_NUMBER_OF_SPECIAL > 0:
         print("\tand 1 or more special characters: ", SPECIAL_CHARACTERS)
-
-    password = input("> ")
-    while not is_valid_password(password):
-        print("Invalid password!")
-        password = input("> ")
-
-    print(f"Your {len(password)}-character password is valid: {password}")
 
 
 def is_valid_password(password):
