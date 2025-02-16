@@ -1,5 +1,10 @@
 .idea/
 */__pycache__
 
+
 # ignore output files
 *.txt
+
+
+# uningnore required files
+!/prac_03/numbers.txt
