@@ -2,4 +2,4 @@
 */__pycache__
 
 # ignore output files
-.txt
+*.txt
