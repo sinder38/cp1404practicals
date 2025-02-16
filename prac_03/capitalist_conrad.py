@@ -20,6 +20,7 @@ FILENAME = "capitalist_conrad.txt"
 
 
 def main():
+    """Capitalist Conrad price simulator"""
     price = INITIAL_PRICE
     day = 0
 
