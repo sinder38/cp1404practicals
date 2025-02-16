@@ -6,24 +6,24 @@ Want to read more about it?
 https://docs.python.org/3/library/string.html#formatstrings
 """
 
-name = "Gibson L-5 CES"
-year = 1922
+NAME = "Gibson L-5 CES"
+YEAR = 1922
 cost = 16035.9
 
 # The 'old' manual way to format text with string concatenation (don't do this):
-print("My guitar: " + name + ", first made in " + str(year))
+print("My guitar: " + NAME + ", first made in " + str(YEAR))
 
 # A better way - using str.format() (don't do this unless you need to):
-print("My guitar: {}, first made in {}".format(name, year))
-print("My guitar: {0}, first made in {1}".format(name, year))
-print("My {0} was first made in {1} (that's right, {1}!)".format(name, year))
+print("My guitar: {}, first made in {}".format(NAME, YEAR))
+print("My guitar: {0}, first made in {1}".format(NAME, YEAR))
+print("My {0} was first made in {1} (that's right, {1}!)".format(NAME, YEAR))
 
 # And with f-string formatting, introduced in Python 3.6 (do this)
-print(f"My {name} was first made in {year} (that's right, {year}!)")
+print(f"My {NAME} was first made in {YEAR} (that's right, {YEAR}!)")
 
 # Formatting currency (grouping with comma, 2 decimal places):
-print("My {} would cost ${:,.2f}".format(name, cost))  # str.format version
-print(f"My {name} would cost ${cost:,.2f}")  # preferred f-string version
+print("My {} would cost ${:,.2f}".format(NAME, cost))  # str.format version
+print(f"My {NAME} would cost ${cost:,.2f}")  # preferred f-string version
 
 # Aligning columns by using width after the :
 # This loop uses enumerate, which is useful when you want both the index and value
@@ -33,7 +33,7 @@ for i, number in enumerate(numbers, 1):
     print(f"Number {i} is {number:5}")
 
 # 1922 Gibson L-5 CES for about $16,036!
-output = f"{year} {name} for about ${cost:,.0f}!"
+output = f"{YEAR} {NAME} for about ${cost:,.0f}!"
 print(output)
 
 # produce the following right-aligned output (DO NOT use a list):
@@ -49,7 +49,7 @@ print(output)
 # 2 ^ 9 is  512
 # 2 ^10 is 1024
 BASE = 2
-EXPONENT_LIMIT = 10 # don't use numbers higher than 99
+EXPONENT_LIMIT = 10  # don't use numbers higher than 99
 
 for i in range(EXPONENT_LIMIT + 1):
-    print(f"{BASE} ^{i:2} is {BASE**i:4}")
+    print(f"{BASE} ^{i:2} is {BASE ** i:4}")
