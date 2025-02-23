@@ -2,6 +2,7 @@
 CP1404/CP5632 Practical
 List comprehensions
 """
+LONG_NAME_REQUIREMENT = 11
 
 names = ["Bob", "Angel", "Jimi", "Alan", "Ada"]
 full_names = ["Bob Martin", "Angel Harlem", "Jimi Hendrix", "Alan Turing", "Ada Lovelace"]
@@ -49,7 +50,6 @@ print(big_numbers)
 
 # NOTE: filter would be insane here
 # NOTE: doing this in 2 actions instead of 1 liner is more readable
-LONG_NAME_REQUIREMENT = 11
 
 long_full_names = [ln for ln in full_names if len(ln) > LONG_NAME_REQUIREMENT]
 last_names_of_lfn = [fn.split()[1] for fn in long_full_names]  # lfn - long full names
