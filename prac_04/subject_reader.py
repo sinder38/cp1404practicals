@@ -8,7 +8,7 @@ FILENAME = "subject_data.txt"
 
 def main():
     data = load_data()
-    print(data)
+    print_subjects(data)
 
 
 def load_data():
@@ -22,8 +22,15 @@ def load_data():
         parts = line.split(',')  # Separate the data into its parts
         # print(parts)  # See what the parts look like (notice the integer is a string)
         parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
-        subjects.append(parts) #NOTE: yield opportunity
+        subjects.append(parts)  # NOTE: yield opportunity
     input_file.close()
     return subjects
+
+
+def print_subjects(subjects):
+    """Prints subjects in a good format"""
+    for subject in subjects:
+        print(f"{subject[0]} is taught by {subject[1]:12} and has {subject[2]:3} students")
+
 
 main()
