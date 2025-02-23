@@ -5,6 +5,7 @@ Quick picks
 
 from random import randint
 
+# Line:
 NUMBERS_PER_LINE = 6
 
 # Random generation:
@@ -21,6 +22,7 @@ def main():
         print(" ".join(f"{number:2}" for number in sorted_quick_pick))
 
 
+# NOTE: full error checking was not requested
 def get_valid_quick_picks():
     """get valid number from user of quick picks"""
     quick_picks_count = int(input("How many quick picks? "))
@@ -30,6 +32,7 @@ def get_valid_quick_picks():
     return quick_picks_count
 
 
+# NOTE: should have used numbers_per_line as parameter
 def generate_quick_pick():
     """Generate random number from user of quick pick"""
     quick_pick = []
@@ -41,4 +44,5 @@ def generate_quick_pick():
     return quick_pick
 
 
-main()
+if __name__ == "__main__":
+    main()
