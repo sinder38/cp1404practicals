@@ -5,9 +5,14 @@ List Exercises
 
 
 def main():
-    """Gets numbers list from user and prints some data about them"""
+    """Do list exercises 1 and 2"""
+    # Part 1
     numbers = get_numbers()
     print_numbers_data(numbers)
+
+    # Part 2 Woefully inadequate security checker
+    username = input("Enter username:")
+    check_username(username)
 
 
 def get_numbers(count=5):
@@ -27,6 +32,19 @@ def print_numbers_data(numbers):
     print("The smallest number is", min(numbers))
     print("The largest number is", max(numbers))
     print("The average of the numbers is", sum(numbers) / len(numbers))
+
+
+USERNAMES = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye',
+             'swei45', 'BaseInterpreterInterface', 'BaseStdIn', 'Command',
+             'ExecState', 'InteractiveConsole', 'InterpreterInterface',
+             'StartServer', 'bob']
+
+
+def check_username(username):
+    if username in USERNAMES:
+        print("Access granted")
+    else:
+        print("Access denied")
 
 
 if __name__ == '__main__':
