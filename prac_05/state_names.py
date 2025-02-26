@@ -9,7 +9,9 @@ CODE_TO_NAME = {"QLD": "Queensland", "NSW": "New South Wales", "NT": "Northern T
 
 
 def main():
-    # print states code - name pairs
+    """Program to match state codes with their names"""
+
+    # print all states code-name pairs
     for (key, value) in CODE_TO_NAME.items():
         print_code_name_pair(key, value)
 
@@ -23,6 +25,7 @@ def main():
 
 
 def print_code_name_pair(pair_key, pair_value):
+    """Print code name pair in a nice format"""
     print(f"{pair_key:<3} is {pair_value}")
 
 
