@@ -4,40 +4,57 @@ Estimate: 15  minutes
 Actual:   17 minutes
 """
 
-COUNTRY_COLUMN_INDEX = 1
-CHAMPION_COLUMN_INDEX = 2
+# NOTE: the most readable solution in my opinion would either a class or just no constants with raw indexes
+
+COLUMNS_TO_EXTRACT = (1, 2)  # Country, Champion name
+COUNTRY_DATA_INDEX = 0
+CHAMPION_DATA_INDEX = 1
 
 
 def main():
-    champion_data = load_champion_data("wimbledon.csv")
+    """Program to display data about wimbledon champions"""
+    # Columns: Year,Country,Champion,Country,Runner-up,Score in the final
+    champion_data = load_champion_data("wimbledon.csv", columns_to_extract=COLUMNS_TO_EXTRACT)
     champion_to_count, countries = process_champion_data(champion_data)
     display_results(champion_to_count, countries)
 
 
-def load_champion_data(filename):
-    # Columns: Year,Country,Champion,Country,Runner-up,Score in the final
+def load_champion_data(filename, columns_to_extract=()):
+    """Load requested champion data from the file"""
     champion_data = []
     with open(filename, "r", encoding="utf-8-sig") as file:
         file.readline()  # Remove column names
 
-        for line in file:
-            row_data = line.strip().split(",")
-            champion_data.append((row_data[COUNTRY_COLUMN_INDEX], row_data[CHAMPION_COLUMN_INDEX]))
+        if len(columns_to_extract):
+            for line in file:
+                row_data = line.strip().split(",")
+                data_element = tuple(row_data[column_index] for column_index in columns_to_extract)
+                champion_data.append(data_element)
+        else:  # if empty then extract all rows
+            for line in file:
+                row_data = line.strip().split(",")
+                champion_data.append(row_data)
+
     return champion_data
 
 
 def process_champion_data(data):
+    """Count champion wins and record their countries"""
     champion_to_win_count = {}
     countries = set()
     for row in data:
-        country_name = row[0]
+
+        country_name = row[COUNTRY_DATA_INDEX]
         countries.add(country_name)
-        champion_to_win_count[row[1]] = champion_to_win_count.get(row[1], 0) + 1
+
+        champion_name = row[CHAMPION_DATA_INDEX]
+        champion_to_win_count[champion_name] = champion_to_win_count.get(champion_name, 0) + 1
 
     return champion_to_win_count, countries
 
 
 def display_results(champion_to_win_count, countries):
+    """Display champion win results"""
     print("Wimbledon Champions: ")
 
     for name, wins in champion_to_win_count.items():
