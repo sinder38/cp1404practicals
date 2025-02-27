@@ -4,9 +4,11 @@ Estimate: 10  minutes
 Actual:   8.3 minutes
 """
 
+#WARN: The suggested solution is not great because biggest length can be determined in the first as done
+# in my program. Also, no main function.
 
 def main():
-    """Program that counts occurrences of words in text stirng"""
+    """Program that counts occurrences of words in text string"""
     lst_str = input("Text: ").split(" ")
     result = {}
     biggest_len = 0
