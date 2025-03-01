@@ -34,15 +34,17 @@ def print_numbers_data(numbers):
     print("The average of the numbers is", sum(numbers) / len(numbers))
 
 
-# NOTE: Not sure if this should  be capital or not. it depends
-USERNAMES = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye',
+# NOTE: Not sure if this should be caps or not.
+# I would like it to be caps but this does not seem the trend among other tasks
+usernames = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye',
              'swei45', 'BaseInterpreterInterface', 'BaseStdIn', 'Command',
              'ExecState', 'InteractiveConsole', 'InterpreterInterface',
              'StartServer', 'bob']
 
 
 def check_username(username):
-    if username in USERNAMES:
+    """Checks whether username is in the username whitelist"""
+    if username in usernames:
         print("Access granted")
     else:
         print("Access denied")
