@@ -22,13 +22,16 @@ class Guitar:
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
 
-    def get_age(self):
+    def get_age(self, year_override=None):
         """Get the age of a guitar based on the current year"""
         #NOTE: Using a constant for a year as done in the solution is a bad idea
         # that will make program wrong only after a year. So:
-        current_year = datetime.now().year
+        if year_override is None:
+            current_year = datetime.now().year
+        else:
+            current_year = year_override
         return current_year - self.year
 
-    def is_vintage(self):
+    def is_vintage(self,year_override=None):
         """Determine if a Guitar is vintage"""
-        return self.get_age() >= VINTAGE_AGE
+        return self.get_age(year_override) >= VINTAGE_AGE
