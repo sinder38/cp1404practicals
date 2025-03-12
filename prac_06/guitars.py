@@ -10,16 +10,14 @@ def main():
     guitars = []
 
     print("My guitars!")
-    # get_guitar_details(guitars)
-
-    guitars.append(Guitar("Gibson L-5 CES", 1922, 16035.40))
-    guitars.append(Guitar("Line 6 JTV-59", 2010, 1512.9))
+    get_guitar_details(guitars)
 
     if guitars:
+        biggest_name_length = max([len(guitar.name) for guitar in guitars]) #NOTE: good enough, but could be better
         print("These are my guitars:")
         for i, guitar in enumerate(guitars, 1):
             vintage_string = " (vintage)" if guitar.is_vintage() else ""
-            print(f"Guitar {i}: {guitar.name:>20} ({guitar.year}), worth ${guitar.cost:10,.2f}{vintage_string}")
+            print(f"Guitar {i}: {guitar.name:>{biggest_name_length}} ({guitar.year}), worth ${guitar.cost:10,.2f}{vintage_string}")
     else:
         print("No guitars :( Quick, go and buy one!")
 
@@ -36,7 +34,6 @@ def get_guitar_details(guitars):
         print(guitar_to_add, "added.")
 
         name = input("Name: ")
-
 
 if __name__ == "__main__":
     main()
