@@ -23,7 +23,7 @@ COLUMN_SEPARATOR = "\t"
 ROW_SEPARATOR = "\n"
 
 # Display config
-STARTING_INDEX = 1
+STARTING_INDEX = 0
 PADDING_STRING = "  "
 
 # Input config
@@ -51,9 +51,10 @@ def main():
         elif choice == "F":
             display_filtered_projects(projects)
         elif choice == "A":
-            pass
+            print("Let's add a new project")
+            insert_into_sorted(projects, Project.create_from_input())
         elif choice == "U":
-            pass
+            print("Let's add a new project")
         else:
             print("Invalid menu choice")
 
@@ -61,7 +62,24 @@ def main():
         choice = input(CHOICE_PROMPT).strip().upper()
 
     # # Farewell
+    if confirm_action("Would you like to save to projects.txt? "):
+        save_projects(projects)
     print("Thank you for using custom-built project management software.")
+
+
+def insert_into_sorted(items, new_item, key=lambda x: x):
+    """Inserts an item into a sorted list while maintaining the order specified by key"""
+
+    i = 0
+    while i < len(items):
+        if key(new_item) < key(items[i]):
+            items.insert(i, new_item)
+            return
+        i += 1
+        # Otherwise, insert at the end
+    items.append(new_item)
+
+
 
 
 def display_filtered_projects(projects):
@@ -77,7 +95,8 @@ def display_projects(projects):
     """Function to display projects in a nice format"""
     incomplete_projects = []
     complete_projects = []
-    for project in sorted(projects):
+    # Projects are already sorted
+    for project in projects:
         if project.is_complete():
             complete_projects.append(project)
         else:
@@ -135,7 +154,7 @@ def load_projects(filename=DEFAULT_FILENAME):
 
     projects_len = len(projects)
     print(f"Loaded {projects_len} projects from {DEFAULT_FILENAME}")
-    return projects, projects_len
+    return sorted(projects), projects_len
 
 
 def save_projects(projects, filename=DEFAULT_FILENAME):
@@ -165,7 +184,7 @@ def save_projects(projects, filename=DEFAULT_FILENAME):
 
 def confirm_action(prompt=""):
     """Prompts user to confirm their action"""
-    confirm = input(f"{prompt} (Y/n): ")
+    confirm = input(f"{prompt}")
     return confirm.lower() in CONFIRM_INPUTS
 
 
