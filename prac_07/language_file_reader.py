@@ -10,6 +10,11 @@ from collections import namedtuple
 from programming_language import ProgrammingLanguage
 
 
+# WARN: Rust does have pointer arithmetic, but it is uncommon to use it.
+# I will change the languages.csv accordingly
+# Source: https://doc.rust-lang.org/std/primitive.pointer.html
+# Rust doesn't have reflection, instead relying on procedural macros
+
 def main():
     """Read file of programming language details, save as objects, display."""
     languages = []
@@ -26,9 +31,11 @@ def main():
         # print(parts)  # debugging
         # Reflection is stored as a string (Yes/No) and we want a Boolean
         reflection = parts[2] == "Yes"
+        # PointerArithmetic is stored as a string (Yes/No) and we want a Boolean
+        point_arithmetic = parts[3] == "Yes"
         # Construct a ProgrammingLanguage object using the elements
         # year should be an int
-        language = ProgrammingLanguage(parts[0], parts[1], reflection, int(parts[3]))
+        language = ProgrammingLanguage(parts[0], parts[1], reflection, point_arithmetic, int(parts[4]))
         # Add the language we've just constructed to the list
         languages.append(language)
     # Close the file as soon as we've finished reading it
