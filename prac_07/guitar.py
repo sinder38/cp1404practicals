@@ -21,6 +21,10 @@ class Guitar:
         """Return a string representation of a Guitar class"""
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
+    def __lt__(self, other):
+        """Return True if this Guitar is younger than the other Guitar"""
+        return self.year < other.year
+
     def get_age(self, year_override=None):
         """Get the age of a guitar based on the current year"""
         # NOTE: Using a constant for a year as done in the solution is a bad idea

@@ -21,6 +21,7 @@ def main():
     """My Guitars program"""
     print("My guitars!\n")
     guitars = load_guitars()
+    guitars.sort() # Sorts by age!
     display_guitars(guitars)
 
 
