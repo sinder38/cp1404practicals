@@ -31,12 +31,10 @@ CONFIRM_INPUTS = ("y", "")  # only lowercase
 
 
 def main():
-    """Song learner program main function"""
+    """Project manager program main function"""
     # Init
     print("Welcome to Pythonic Project Management")
     projects, projects_len = load_projects()
-    # sort_songs(songs)
-    # songs_length = len(songs)
 
     # Main cycle
     print(MENU)
@@ -54,7 +52,7 @@ def main():
             print("Let's add a new project")
             insert_into_sorted(projects, Project.create_from_input())
         elif choice == "U":
-            print("Let's add a new project")
+            update_project(projects)
         else:
             print("Invalid menu choice")
 
@@ -65,6 +63,29 @@ def main():
     if confirm_action("Would you like to save to projects.txt? "):
         save_projects(projects)
     print("Thank you for using custom-built project management software.")
+
+
+def update_project(projects):
+    """Update project progress and priority, enter empty field to retain values"""
+
+    for index, project in enumerate(projects, STARTING_INDEX):
+        print(index, project)
+
+    project_index = int(input("Project choice: ")) - STARTING_INDEX
+
+    print(projects[project_index])
+
+    # Update progress
+    new_progress = Project.get_completion_from_input("New Percentage: ", skip_capability=True)
+    if new_progress:
+        projects[project_index].update_progress(new_progress)
+
+    # Update priority
+    new_priority = Project.get_priority_from_input("New Priority: ", skip_capability=True)
+    if new_priority:  # Check if the input is not empty
+        projects[project_index].update_priority(new_priority)
+
+    print("Project updated successfully!")
 
 
 def insert_into_sorted(items, new_item, key=lambda x: x):
@@ -80,11 +101,9 @@ def insert_into_sorted(items, new_item, key=lambda x: x):
     items.append(new_item)
 
 
-
-
 def display_filtered_projects(projects):
     """Display projects filtered by start date and sorted by start date"""
-    filter_date = Project.get_date("Show projects that start after date")
+    filter_date = Project.get_project_date_from_input("Show projects that start after date")
     processed_projects = sorted(filter(lambda p: p.start_date >= filter_date, projects), key=lambda p: p.start_date)
 
     for project in processed_projects:
