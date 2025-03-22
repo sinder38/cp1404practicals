@@ -7,8 +7,7 @@ MENU = """- (L)oad projects
 - (F)ilter projects by date
 - (A)dd new project  
 - (U)pdate project
-- (Q)uit
-"""
+- (Q)uit"""
 
 CHOICE_PROMPT = ">>> "
 
@@ -25,6 +24,7 @@ ROW_SEPARATOR = "\n"
 
 # Display config
 STARTING_INDEX = 1
+PADDING_STRING = "  "
 
 # Input config
 CONFIRM_INPUTS = ("y", "")  # only lowercase
@@ -49,7 +49,7 @@ def main():
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            pass
+            display_filtered_projects(projects)
         elif choice == "A":
             pass
         elif choice == "U":
@@ -64,23 +64,32 @@ def main():
     print("Thank you for using custom-built project management software.")
 
 
+def display_filtered_projects(projects):
+    """Display projects filtered by start date and sorted by start date"""
+    filter_date = Project.get_date("Show projects that start after date")
+    processed_projects = sorted(filter(lambda p: p.start_date >= filter_date, projects), key=lambda p: p.start_date)
+
+    for project in processed_projects:
+        print(project)
+
+
 def display_projects(projects):
     """Function to display projects in a nice format"""
     incomplete_projects = []
     complete_projects = []
-    for project in projects:
+    for project in sorted(projects):
         if project.is_complete():
             complete_projects.append(project)
         else:
             incomplete_projects.append(project)
 
     print("Incomplete projects:")
-    for index, project in enumerate(incomplete_projects, STARTING_INDEX):
-        print(index, project)
+    for project in incomplete_projects:
+        print(PADDING_STRING, project)
 
     print("Complete projects:")
-    for index, project in enumerate(complete_projects, STARTING_INDEX):
-        print(index, project)
+    for project in complete_projects:
+        print(PADDING_STRING, project)
 
 
 def load_projects(filename=DEFAULT_FILENAME):
