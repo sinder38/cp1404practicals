@@ -21,6 +21,7 @@ PRIORITY = "Priority"
 COST_ESTIMATE = "Cost Estimate"
 COMPLETION_PERCENTAGE = "Completion Percentage"
 COLUMN_SEPARATOR = "\t"
+ROW_SEPARATOR = "\n"
 
 # Display config
 STARTING_INDEX = 1
@@ -33,22 +34,25 @@ def main():
     """Song learner program main function"""
     # Init
     print("Welcome to Pythonic Project Management")
-    projects = load_projects()
-    projects_len = len(projects)
+    projects, projects_len = load_projects()
     # sort_songs(songs)
     # songs_length = len(songs)
-
-    print(f"Loaded {projects_len} projects from {DEFAULT_FILENAME}")
 
     # Main cycle
     print(MENU)
     choice = input(CHOICE_PROMPT).strip().upper()
     while choice != "Q":
-        if choice == "D":
+        if choice == "L":
+            projects, projects_len = load_projects()
+        elif choice == "S":
+            save_projects(projects)
+        elif choice == "D":
+            display_projects(projects)
+        elif choice == "F":
             pass
         elif choice == "A":
             pass
-        elif choice == "C":
+        elif choice == "U":
             pass
         else:
             print("Invalid menu choice")
@@ -58,6 +62,25 @@ def main():
 
     # # Farewell
     print("Thank you for using custom-built project management software.")
+
+
+def display_projects(projects):
+    """Function to display projects in a nice format"""
+    incomplete_projects = []
+    complete_projects = []
+    for project in projects:
+        if project.is_complete():
+            complete_projects.append(project)
+        else:
+            incomplete_projects.append(project)
+
+    print("Incomplete projects:")
+    for index, project in enumerate(incomplete_projects, STARTING_INDEX):
+        print(index, project)
+
+    print("Complete projects:")
+    for index, project in enumerate(complete_projects, STARTING_INDEX):
+        print(index, project)
 
 
 def load_projects(filename=DEFAULT_FILENAME):
@@ -101,7 +124,34 @@ def load_projects(filename=DEFAULT_FILENAME):
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
 
-    return projects
+    projects_len = len(projects)
+    print(f"Loaded {projects_len} projects from {DEFAULT_FILENAME}")
+    return projects, projects_len
+
+
+def save_projects(projects, filename=DEFAULT_FILENAME):
+    """Save project data to a txt file in the same format as it was loaded"""
+    try:
+        with open(filename, mode="w", encoding=TXT_ENCODING) as file:
+            # Add table header
+            header = COLUMN_SEPARATOR.join([NAME, START_DATE, PRIORITY, COST_ESTIMATE, COMPLETION_PERCENTAGE])
+            file.write(header + ROW_SEPARATOR)
+
+            # Add all projects
+            for project in projects:
+                row = COLUMN_SEPARATOR.join([
+                    project.name,
+                    project.start_date.strftime("%d/%m/%Y"),
+                    str(project.priority),
+                    str(project.cost_estimate),
+                    str(project.completion_percentage)
+                ])
+                file.write(row + ROW_SEPARATOR)
+    except Exception as e:
+        print(f"Opsy, an error occurred while saving the file: {e}")
+
+    projects_len = len(projects)
+    print(f"Saved {projects_len} projects to {DEFAULT_FILENAME}")
 
 
 def confirm_action(prompt=""):

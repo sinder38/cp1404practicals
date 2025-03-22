@@ -26,6 +26,10 @@ class Project:
             f" estimate: ${self.cost_estimate:,.2f},"
             f" completion: {self.completion_percentage}%")
 
+    def is_complete(self):
+        """Return True if the project is complete"""
+        return self.completion_percentage >= 100
+
     # NOTE: this is just for better organization and task wanted helper functions
     @staticmethod
     def create_from_input():
@@ -72,4 +76,3 @@ class Project:
                     return value
             except ValueError:
                 print("Invalid input; enter a valid number.")
-
