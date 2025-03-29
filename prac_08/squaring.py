@@ -9,11 +9,12 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 
-__author__ = 'Lindsay Ward'
+__author__ = 'sinder'
 
 
 class SquareNumberApp(App):
     """ SquareNumberApp is a Kivy App for squaring a number """
+
     def build(self):
         """ build the Kivy app from the kv file """
         Window.size = (200, 100)
