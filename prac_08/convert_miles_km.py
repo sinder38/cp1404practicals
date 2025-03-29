@@ -13,6 +13,7 @@ MILES_TO_KM_RATE = 1.60934
 class MilesConverterApp(App):
     """App to convert miles to kilometres"""
     output = StringProperty()
+
     def build(self):
         """Build and return the root widget from KV file"""
         self.title = "Convert Miles to Kilometres"
@@ -21,14 +22,21 @@ class MilesConverterApp(App):
 
     def handle_calculate(self, text):
         print("Handle calculate")
-        miles = float(text)
+        miles = self.safe_convert_to_float(text)
         self.output = str(miles * MILES_TO_KM_RATE)
 
     def handle_increment(self, text, change):
         print("Handle increment")
-        miles = float(text) + change
+        miles = self.safe_convert_to_float(text) + change
         self.root.ids.input_miles.text = str(miles)
 
+    @staticmethod
+    def safe_convert_to_float(text, default=0.0):
+        """Safely convert text to float, returning default if conversion fails"""
+        try:
+            return float(text)
+        except ValueError:
+            return default
 
 
 MilesConverterApp().run()
