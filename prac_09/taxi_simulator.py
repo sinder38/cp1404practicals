@@ -3,7 +3,6 @@ CP1404/CP5632 Practical
 Taxi simulator
 """
 
-from prac_09.car import Car
 from prac_09.taxi import Taxi
 from prac_09.silver_service_taxi import SilverServiceTaxi
 
@@ -20,7 +19,15 @@ def main():
     menu_choice = input(CHOICE_PROMPT).lower()
     while menu_choice != "q":
         if menu_choice == "c":
-            pass
+            print("Taxis available:")
+            for i, taxi in enumerate(taxis):
+                print(f"{i} - {taxi}")
+            # NOTE: range checking is done outside because of sample output reqs
+            taxi_choice = get_number("Choose taxi: ")
+            try:
+                current_taxi = taxis[taxi_choice]
+            except IndexError:
+                print("Invalid taxi choice")
         elif menu_choice == "d":
             if current_taxi:
                 current_taxi.start_fare()
@@ -58,3 +65,6 @@ def get_number(prompt="", min_value=None, max_value=None, input_type: type = int
                 return value
         except ValueError:
             print("Invalid input; enter a valid number.")
+
+if __name__ == "__main__":
+    main()
