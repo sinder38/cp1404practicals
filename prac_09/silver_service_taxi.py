@@ -22,4 +22,4 @@ class SilverServiceTaxi(Taxi):
 
     def get_fare(self):
         """Get the current fare"""
-        return self.flagfall + super().get_fare()
+        return round(self.flagfall + super().get_fare(), 1)
