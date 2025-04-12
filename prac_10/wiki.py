@@ -3,22 +3,31 @@ import wikipedia
 
 def main():
     """Print details of a wikipedia article from user prompt"""
-    print("Enter a Wikipedia page title or search phrase (blank to quit):")
-
     while True:
-        user_input = input("> ").strip()
+
+        user_input = input("Enter page title: ").strip()
         if user_input == "":
-            print("Goodbye!")
+            print("Thank you.")
             break
-        try:
-            page = wikipedia.page(user_input, auto_suggest=False)
 
-            print(f"\nTitle: {page.title}")
-            print(f"URL: {page.url}")
-            print(f"Summary:\n{wikipedia.summary()}\n")
+        display_page_from_prompt(user_input)
 
-        except Exception as e:
-            print(f"An error occurred: {e}")
+
+def display_page_from_prompt(user_input):
+    """Display a wikipedia article from user prompt"""
+    try:
+        page = wikipedia.page(user_input, auto_suggest=False)
+
+        print(f"\n{page.title}")
+        print(f"{page.summary}")
+        print(f"URL: {page.url}")
+    except wikipedia.exceptions.DisambiguationError as e:
+        print(f"We need a more specific title. Try one of the following, or a new search:")
+        print(e.options)
+    except wikipedia.exceptions.PageError:
+        print(f"Page id \"{user_input}\" does not match any pages. Try another id!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
